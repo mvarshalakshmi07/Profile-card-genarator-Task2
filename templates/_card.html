@@ -1,0 +1,20 @@
+{# Server-rendered profile card. Jinja autoescape protects every field. #}
+<article class="pcard theme-{{ p.theme }}">
+  <div class="pcard-banner"></div>
+  <div class="pcard-body">
+    <div class="pcard-avatar">
+      <span class="pcard-initials">{{ initials }}</span>
+      {% if p.image_url %}<img src="{{ p.image_url }}" alt="{{ p.name }}" referrerpolicy="no-referrer" data-fallback>{% endif %}
+    </div>
+    <h3 class="pcard-name">{{ p.name }}</h3>
+    {% if p.title %}<p class="pcard-title">{{ p.title }}</p>{% endif %}
+    {% if p.location %}<p class="pcard-loc"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>{{ p.location }}</p>{% endif %}
+    {% if p.bio %}<p class="pcard-bio">{{ p.bio }}</p>{% else %}<p class="pcard-bio muted">Your bio will appear here.</p>{% endif %}
+    {% if p.skills %}<div class="chips">{% for s in p.skills %}<span class="chip">{{ s }}</span>{% endfor %}</div>{% endif %}
+    {% if p.website or p.email %}
+    <div class="pcard-links">
+      {% if p.website %}<a href="{{ p.website }}" target="_blank" rel="noopener noreferrer">Website</a>{% endif %}
+      {% if p.email %}<a href="mailto:{{ p.email }}">Email</a>{% endif %}
+    </div>{% endif %}
+  </div>
+</article>
